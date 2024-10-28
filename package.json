@@ -2,8 +2,6 @@
   "name": "my-portfolio",
   "version": "0.1.0",
   "private": true,
-  "description": "This is a portfolio project showcasing my work and skills as a developer.",
-  "homepage": "https://github.com/CyberTycoon/portfolio.git",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -29,15 +27,12 @@
     "typescript": "^5.0.0"
   },
   "engines": {
-    "node": "16.x"
+    "node": "20.17.0"
   },
   "license": "MIT",
+  "homepage": "https://github.com/CyberTycoon/silas-portfolio.git",
   "repository": {
     "type": "git",
-    "url": "https://github.com/CyberTycoon/portfolio.git"
-  },
-  "bugs": {
-    "url": "https://github.com/CyberTycoon/portfolio/issues"
-  },
-  "author": "Silas Okanlawon"
+    "url": "https://github.com/CyberTycoon/silas-portfolio.git"
+  }
 }
