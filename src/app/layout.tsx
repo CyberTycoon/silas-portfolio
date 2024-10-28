@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "../components/Navbar";
-import Link from "next/link";
 import Head from "next/head";  // Import Head
 
 const geistSans = localFont({
@@ -29,7 +28,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Head>
-        <link rel="icon" href="/profile.jpg" />
+        {/* Set your image as the favicon here */}
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
       </Head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
