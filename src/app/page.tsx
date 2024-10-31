@@ -17,7 +17,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="flex flex-col items-center justify-center text-center py-20 space-y-4">
         <motion.h1
-          className="text-5xl font-bold"
+          className="text-5xl px-4 font-bold"
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.5 }}
@@ -25,7 +25,7 @@ export default function Home() {
           Welcome to My Portfolio
         </motion.h1>
         <motion.p
-          className="text-xl max-w-3xl"
+          className="text-xl px-5 max-w-3xl"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 1.5 }}
@@ -42,7 +42,7 @@ export default function Home() {
       </section>
 
       {/* Services Section */}
-      <section className="py-16 bg-gray-800">
+      <section className="py-16 px-6 bg-gray-800">
         <div className="max-w-7xl mx-auto text-center">
           <motion.h2
             className="text-4xl font-bold mb-8"
@@ -84,7 +84,7 @@ export default function Home() {
       </section>
 
      
-  <section className="py-10 bg-white">
+  <section className="py-10 px-6 bg-white">
   <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">Projects & Solutions</h2>
   <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-4">
     

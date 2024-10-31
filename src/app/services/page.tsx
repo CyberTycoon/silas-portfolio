@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function Services() {
   return (
-    <section className="bg-gray-100 py-20">
+    <section className="bg-gray-100 px-4  py-20">
       <div className="container mx-auto px-4">
         {/* Section Heading */}
         <motion.h2
@@ -19,7 +19,6 @@ export default function Services() {
         {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
           
-          {/* Full Stack Web Development */}
           <motion.div
             className="bg-white p-6 rounded-lg shadow-lg"
             initial={{ opacity: 0, y: 100 }}

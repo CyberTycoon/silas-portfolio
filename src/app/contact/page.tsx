@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
-import emailjs from 'emailjs-com'; // Import EmailJS
+import emailjs from 'emailjs-com'; 
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -12,7 +12,6 @@ export default function Contact() {
   });
   const [status, setStatus] = useState("");
 
-  // Explicitly type the parameter
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -24,7 +23,6 @@ export default function Contact() {
     try {
       setStatus("Sending...");
 
-      // Prepare the message content
       const templateParams = {
         user_name: formData.name,
         user_email: formData.email,

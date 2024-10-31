@@ -27,7 +27,7 @@ export default function About() {
             transition={{ duration: 1 }}
           >
             <Image
-              src="/pic.jpg" // Replace with your profile image path
+              src="/pic.jpg" 
               alt="Profile Image"
               width={400}
               height={400}
@@ -42,10 +42,10 @@ export default function About() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
           >
-            <h3 className="text-2xl font-semibold">
+            <h3 className="text-2xl px-4 font-semibold">
              SOFTWARE ENGINEER
             </h3>
-            <p className="text-lg text-gray-700">
+            <p className="text-lg px-4 text-gray-700">
             I am a versatile software engineer specializing in web development, data processing, and automation. My expertise encompasses full stack development, where I leverage front-end technologies such as HTML, CSS, JavaScript, React, Next.js, and Tailwind CSS, alongside back-end solutions using Python and Flask. I excel in creating dynamic web applications that provide seamless user experiences.
 
 In addition to my web development capabilities, I have a strong foundation in data analytics and automation. I am skilled in data analysis, processing, and visualization, enabling me to transform raw data into actionable insights. My proficiency in task automation and web scraping allows me to streamline processes efficiently, while my experience in bot development enhances my ability to deliver robust automation solutions.
@@ -56,14 +56,14 @@ With a commitment to continuous learning and innovation, I am passionate about l
 
 
             </p>
-            <p className="text-lg text-gray-700">
+            <p className="text-lg px-4 text-gray-700">
               Additionally, I am proficient in graphic design, creating logos, book covers, flyers, and more. My diverse
               skill set also includes automating workflows using Python, scraping websites for data,
               and sending bulk emails. I am passionate about learning and growing, and I’m also
               exploring the fields of blockchain and cybersecurity.
             </p>
             <motion.button
-              className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300"
+              className="bg-blue-600 ml-4 px-8 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300"
               whileHover={{ scale: 1.05 }}
             >
               Contact Me
