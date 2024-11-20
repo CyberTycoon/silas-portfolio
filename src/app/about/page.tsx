@@ -46,22 +46,17 @@ export default function About() {
              SOFTWARE ENGINEER
             </h3>
             <p className="text-lg px-4 text-gray-700">
-            I am a versatile software engineer specializing in web development, data processing, and automation. My expertise encompasses full stack development, where I leverage front-end technologies such as HTML, CSS, JavaScript, React, Next.js, and Tailwind CSS, alongside back-end solutions using Python and Flask. I excel in creating dynamic web applications that provide seamless user experiences.
+            I am a versatile software engineer with expertise in web development, data science, and machine learning. My skills include full-stack development using technologies like HTML, CSS, JavaScript, React, Next.js, Tailwind CSS, and back-end solutions with Python and Flask. I specialize in creating dynamic web applications and seamless user experiences.
 
-In addition to my web development capabilities, I have a strong foundation in data analytics and automation. I am skilled in data analysis, processing, and visualization, enabling me to transform raw data into actionable insights. My proficiency in task automation and web scraping allows me to streamline processes efficiently, while my experience in bot development enhances my ability to deliver robust automation solutions.
+With a strong foundation in data analysis, processing, and visualization, I transform raw data into actionable insights. My proficiency in machine learning enables me to build predictive models, while my expertise in task automation, web scraping, and bot development streamlines workflows efficiently.
 
-I also focus on application and integration solutions, developing both desktop and web applications that cater to diverse client needs. I specialize in Google Sheets integration and document management solutions, ensuring that data is well-organized and accessible. My strong API integration skills allow me to customize applications, making them more versatile and user-friendly.
+I also deliver robust application and integration solutions, including Google Sheets integration, document management, and custom API implementations, ensuring data is accessible and applications are user-friendly.
 
-With a commitment to continuous learning and innovation, I am passionate about leveraging technology to solve complex problems and enhance productivity.
+Driven by a passion for continuous learning and innovation, I am committed to solving complex problems and enhancing productivity through cutting-edge technology.
 
 
             </p>
-            <p className="text-lg px-4 text-gray-700">
-              Additionally, I am proficient in graphic design, creating logos, book covers, flyers, and more. My diverse
-              skill set also includes automating workflows using Python, scraping websites for data,
-              and sending bulk emails. I am passionate about learning and growing, and I’m also
-              exploring the fields of blockchain and cybersecurity.
-            </p>
+          
             <motion.button
               className="bg-blue-600 ml-4 px-8 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300"
               whileHover={{ scale: 1.05 }}

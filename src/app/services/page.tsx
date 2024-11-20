@@ -59,10 +59,11 @@ export default function Services() {
             whileHover={{scale: 1.05}}
           >
             <h3 className="text-2xl font-semibold text-gray-900 mb-2">
-            API Integration and Customization
+            
+Data Science and Machine Learning Solutions
             </h3>
             <p className="text-gray-700">
-            Integrating third-party APIs into applications and customizing them to meet specific client needs.
+            Developing data-driven solutions by leveraging machine learning models and integrating them into applications to address specific client needs.
             </p>
           </motion.div>
 

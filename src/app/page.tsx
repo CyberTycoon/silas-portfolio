@@ -30,7 +30,7 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 1.5 }}
         >
-          I’m a Full Stack Developer, Data Analyst, and Automation Specialist, offering dynamic web solutions, advanced data processing, insightful analytics, seamless API integrations, custom task automations, efficient file and document management, and specialized bot development.
+          I’m a Full Stack Developer, Data Scientist, and Automation Specialist, offering dynamic web solutions, advanced data science, insightful analytics, seamless API integrations, custom task automations, efficient file and document management, and specialized bot development.
         </motion.p>
         <motion.a
           className="bg-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300"
@@ -76,8 +76,8 @@ export default function Home() {
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.3 }}
             >
-              <h3 className="text-2xl font-semibold mb-4">Application & Integration Solutions</h3>
-              <p>Designing and implementing web applications using clean, up-to-date code for a seamless user experience.</p>
+              <h3 className="text-2xl font-semibold mb-4">Machine Learning Solutions</h3>
+              <p>Building and deploying machine learning models using cutting-edge algorithms and techniques to deliver accurate predictions and actionable insights.</p>
             </motion.div>
           </div>
         </div>
