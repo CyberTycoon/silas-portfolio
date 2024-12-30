@@ -31,7 +31,7 @@ export default function About() {
               alt="Profile Image"
               width={400}
               height={400}
-              className="rounded-[100%] object-cover mx-auto shadow-lg w-50 h-50"
+              className="rounded-md object-cover mx-auto shadow-lg w-50 h-50"
             />
           </motion.div>
 
