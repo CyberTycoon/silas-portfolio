@@ -46,7 +46,7 @@ export default function About() {
              SOFTWARE ENGINEER
             </h3>
             <p className="text-lg px-4 text-gray-700">
-            Versatile software engineer with expertise in web development, data science, and python automation. Proficient in full-stack development (React, Next.js, Python, Flask) and creating dynamic user experiences. Skilled in data analysis, machine learning, task automation, and custom API integrations to deliver innovative solutions and streamline workflows. Passionate about solving complex problems and enhancing productivity with cutting-edge technology.
+            I am Silas Okanlawon a Versatile software developer with expertise in web development, data science, and python automation. Proficient in full-stack development (React, Next.js, Python, Flask) and creating dynamic user experiences. Skilled in data analysis, machine learning, task automation, and custom API integrations to deliver innovative solutions and streamline workflows. Passionate about solving complex problems and enhancing productivity with cutting-edge technology.
 
 
             </p>
