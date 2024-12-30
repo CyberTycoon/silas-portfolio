@@ -155,6 +155,11 @@ export default function Contact() {
             </div>
 
             <div className="mb-4">
+              <h4 className="text-lg font-semibold text-gray-800">Phone Number:</h4>
+              <p className="text-gray-600">+234 902 465 0039</p>
+            </div>
+
+            <div className="mb-4">
               <h4 className="text-lg font-semibold text-gray-800">Upwork:</h4>
               <a href="https://www.upwork.com/freelancers/~0190e47b810764d48e?mp_source=share" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
                   My Upwork Profile
