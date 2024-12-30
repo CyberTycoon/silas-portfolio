@@ -24,8 +24,8 @@ export default function Contact() {
       setStatus("Sending...");
 
       const templateParams = {
-        user_name: formData.name,
-        user_email: formData.email,
+        name: formData.name,
+        email: formData.email,
         message: formData.message,
       };
 

@@ -19,8 +19,87 @@ export default function Projects() {
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+
+           {/* Swolenormous */}
+           <motion.div
+            className="bg-white p-6 rounded-lg shadow-lg"
+            initial={{ opacity: 0, x: -100 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1 }}
+          >
+            <Image
+              src="/swolenormous.png" // Replace with your project image path
+              alt="Automated Stock Price Notifier"
+              width={600}
+              height={400}
+              className="rounded-lg mb-4"
+            />
+            <h3 className="text-2xl font-semibold mt-20 text-gray-900">
+            Swolenormous (Gym Site)
+            </h3>
+            <p className="text-gray-700 mt-2">
+            Developed an engaging and responsive gym site named Swolenormous. The platform offers dynamic features like class scheduling, membership management, and fitness tracking, providing a seamless experience for fitness enthusiasts and gym owners.</p>
+            <div className="mt-8 flex flex-row justify-between">
+              <a
+                href="https://github.com/CyberTycoon/swolenormous" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 font-semibold hover:underline"
+              >
+                View Repository
+              </a>
+              <a
+                href="https://swolenormous-eta.vercel.app/" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 font-semibold hover:underline"
+              >
+                View website
+              </a>
+            </div>
+          </motion.div>
           
-          {/* Automated Stock Price Notifier */}
+                    {/* Flow AI */}
+                    <motion.div
+            className="bg-white p-6 rounded-lg shadow-lg"
+            initial={{ opacity: 0, x: -100 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1 }}
+          >
+            <Image
+              src="/flowAI.png" // Replace with your project image path
+              alt="Weather Forecast Web Application"
+              width={600}
+              height={400}
+              className="rounded-lg"
+            />
+            <h3 className="text-2xl font-semibold mt-4 text-gray-900">
+            FlowAI (AI Chat App)
+            </h3>
+            <p className="text-gray-700 mt-2">
+            Created an innovative and user-friendly AI chat application named FlowAI. The platform delivers intelligent conversational experiences with real-time responses, context-aware dialogue, and customizable chat flows, making it a versatile solution for businesses and individual users alike.
+            </p>
+            <div className="mt-4 flex justify-between">
+              <a
+                href="https://github.com/CyberTycoon/FlowAI" // Replace with GitHub link
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 font-semibold hover:underline"
+              >
+                View Repository
+              </a>
+              <a
+                href="https://flow-3dfi9fn3u-silas-okanlawon-s-projects.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 font-semibold hover:underline"
+              >
+                View website
+              </a>
+            </div>
+          </motion.div>      
+
+                    {/* Automated Stock Price Notifier */}
           <motion.div
             className="bg-white p-6 rounded-lg shadow-lg"
             initial={{ opacity: 0, x: -100 }}
@@ -50,7 +129,7 @@ export default function Projects() {
                 View Repository
               </a>
             </div>
-          </motion.div>
+          </motion.div>    
 
           {/* Web Automation for Padel Club Court Reservations */}
           <motion.div
@@ -168,7 +247,7 @@ export default function Projects() {
             <p className="text-gray-700 mt-2">
               Built a responsive weather forecast application that fetches real-time weather data using Next.js and API integration. Designed with Tailwind CSS for a clean and modern interface.
             </p>
-            <div className="mt-4">
+            <div className="mt-4 flex justify-between">
               <a
                 href="https://github.com/CyberTycoon/weatherApp.git" // Replace with GitHub link
                 target="_blank"
@@ -176,6 +255,14 @@ export default function Projects() {
                 className="text-blue-600 font-semibold hover:underline"
               >
                 View Repository
+              </a>
+              <a
+                href="https://weather-watch-seven.vercel.app/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 font-semibold hover:underline"
+              >
+                View website
               </a>
             </div>
           </motion.div>

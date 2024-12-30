@@ -14,7 +14,7 @@ export default function About() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          About Us
+          About Me
         </motion.h2>
 
         {/* About Content */}
@@ -31,7 +31,7 @@ export default function About() {
               alt="Profile Image"
               width={400}
               height={400}
-              className="rounded-full object-cover mx-auto shadow-lg w-50 h-50"
+              className="rounded-[100%] object-cover mx-auto shadow-lg w-50 h-50"
             />
           </motion.div>
 
@@ -46,13 +46,7 @@ export default function About() {
              SOFTWARE ENGINEER
             </h3>
             <p className="text-lg px-4 text-gray-700">
-            I am a versatile software engineer with expertise in web development, data science, and machine learning. My skills include full-stack development using technologies like HTML, CSS, JavaScript, React, Next.js, Tailwind CSS, and back-end solutions with Python and Flask. I specialize in creating dynamic web applications and seamless user experiences.
-
-With a strong foundation in data analysis, processing, and visualization, I transform raw data into actionable insights. My proficiency in machine learning enables me to build predictive models, while my expertise in task automation, web scraping, and bot development streamlines workflows efficiently.
-
-I also deliver robust application and integration solutions, including Google Sheets integration, document management, and custom API implementations, ensuring data is accessible and applications are user-friendly.
-
-Driven by a passion for continuous learning and innovation, I am committed to solving complex problems and enhancing productivity through cutting-edge technology.
+            Versatile software engineer with expertise in web development, data science, and python automation. Proficient in full-stack development (React, Next.js, Python, Flask) and creating dynamic user experiences. Skilled in data analysis, machine learning, task automation, and custom API integrations to deliver innovative solutions and streamline workflows. Passionate about solving complex problems and enhancing productivity with cutting-edge technology.
 
 
             </p>
