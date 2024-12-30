@@ -27,11 +27,11 @@ export default function About() {
             transition={{ duration: 1 }}
           >
             <Image
-              src="/pic.jpg" 
+              src="/pic.png" 
               alt="Profile Image"
               width={400}
               height={400}
-              className="rounded-md object-cover mx-auto shadow-lg w-50 h-50"
+              className="rounded-lg object-contain mx-auto shadow-lg w-50 h-50"
             />
           </motion.div>
 
