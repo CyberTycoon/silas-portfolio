@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-
+import Link from 'next/link';
 
 export default function About() {
   return (
@@ -53,11 +53,13 @@ export default function About() {
             </p>
           
             <motion.button
-              className="bg-blue-600 ml-4 px-8 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300"
-              whileHover={{ scale: 1.05 }}
-            >
-              <a href="/Contact">Contact Me</a>
-            </motion.button>
+      className="bg-blue-600 ml-4 px-8 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300"
+      whileHover={{ scale: 1.05 }}
+    >
+      <Link href="/Contact" passHref>
+        <a className="no-underline text-white">Contact Me</a>
+      </Link>
+    </motion.button>
           </motion.div>
         </div>
       </div>
