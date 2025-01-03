@@ -56,7 +56,7 @@ export default function About() {
       className="bg-blue-600 ml-4 px-8 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300"
       whileHover={{ scale: 1.05 }}
     >
-      <Link href="/Contact" passHref>
+      <Link href="/contact" passHref>
         <a className="no-underline text-white">Contact Me</a>
       </Link>
     </motion.button>
