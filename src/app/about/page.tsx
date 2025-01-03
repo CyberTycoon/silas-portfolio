@@ -57,7 +57,7 @@ export default function About() {
       whileHover={{ scale: 1.05 }}
     >
       <Link href="/contact" passHref>
-        <a className="no-underline text-white">Contact Me</a>
+       Contact Me
       </Link>
     </motion.button>
           </motion.div>

@@ -26,7 +26,7 @@ export default function Home() {
           Welcome to My Portfolio
         </motion.h1>
         <motion.p
-          className="text-xl md:px-5 max-w-3xl"
+          className="text-xl md:px-5 max-w-3xl px-2"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 1.5 }}
