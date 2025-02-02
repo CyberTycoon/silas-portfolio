@@ -5,13 +5,6 @@ import Image from "next/image"
 import Link from "next/link"
 import { FaRocket, FaCode, FaDatabase } from "react-icons/fa"
 
-const GradientText = ({ children, className }) => (
-  <span
-    className={`bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 ${className}`}
-  >
-    {children}
-  </span>
-)
 
 export default function About() {
   return (
@@ -24,7 +17,7 @@ export default function About() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          <GradientText>About Me</GradientText>
+          <h1 className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">About Me</h1>
         </motion.h2>
 
         {/* About Content */}
@@ -53,7 +46,7 @@ export default function About() {
             transition={{ duration: 1 }}
           >
             <h3 className="text-2xl px-4 font-semibold">
-              <GradientText>SOFTWARE ENGINEER</GradientText>
+              <h1 className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">SOFTWARE ENGINEER</h1>
             </h3>
             <p className="text-lg px-4 text-gray-300">
               I am Silas Okanlawon, a versatile software developer with expertise in web development, data science, and

@@ -5,13 +5,7 @@ import { useState } from "react";
 import emailjs from 'emailjs-com'; 
 
 
-const GradientText = ({ children, className }) => (
-  <span
-    className={`bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 ${className}`}
-  >
-    {children}
-  </span>
-)
+
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: "",
@@ -86,7 +80,7 @@ export default function Contact() {
                   Name
                 </label>
                 <input
-                  className="shadow ring-2 ring-pink-700 text-white bg-clip-border bg-gradient-to-r from-purple-700 to-pink-700 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className="shadow ring-2 ring-pink-700 text-white bg-clip-border bg-gradient-to-r from-purple-700 to-pink-700 appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
                   id="name"
                   name="name"
                   type="text"
