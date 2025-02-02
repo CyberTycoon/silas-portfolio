@@ -1,12 +1,21 @@
-"use client"; // Ensures client-side rendering
+"use client"
 
-import { motion } from 'framer-motion';
-import Image from 'next/image';
-import Link from 'next/link';
+import { motion } from "framer-motion"
+import Image from "next/image"
+import Link from "next/link"
+import { FaRocket, FaCode, FaDatabase } from "react-icons/fa"
+
+const GradientText = ({ children, className }) => (
+  <span
+    className={`bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 ${className}`}
+  >
+    {children}
+  </span>
+)
 
 export default function About() {
   return (
-    <section className="bg-white py-20 text-gray-900">
+    <section className="bg-gray-900 py-20 text-white min-h-screen">
       <div className="container mx-auto px-4">
         {/* Section Heading */}
         <motion.h2
@@ -15,7 +24,7 @@ export default function About() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          About Me
+          <GradientText>About Me</GradientText>
         </motion.h2>
 
         {/* About Content */}
@@ -28,7 +37,7 @@ export default function About() {
             transition={{ duration: 1 }}
           >
             <Image
-              src="/pic.png" 
+              src="/pic.png"
               alt="Profile Image"
               width={400}
               height={400}
@@ -44,25 +53,56 @@ export default function About() {
             transition={{ duration: 1 }}
           >
             <h3 className="text-2xl px-4 font-semibold">
-             SOFTWARE ENGINEER
+              <GradientText>SOFTWARE ENGINEER</GradientText>
             </h3>
-            <p className="text-lg px-4 text-gray-700">
-            I am Silas Okanlawon a Versatile software developer with expertise in web development, data science, and python automation. Proficient in full-stack development (React, Next.js, Python, Flask) and creating dynamic user experiences. Skilled in data analysis, machine learning, task automation, and custom API integrations to deliver innovative solutions and streamline workflows. Passionate about solving complex problems and enhancing productivity with cutting-edge technology.
-
-
+            <p className="text-lg px-4 text-gray-300">
+              I am Silas Okanlawon, a versatile software developer with expertise in web development, data science, and
+              Python automation. Proficient in full-stack development (React, Next.js, Python, Flask, Firebase, REST API) and creating
+              dynamic user experiences. Skilled in data analysis, machine learning, task automation, and custom API
+              integrations to deliver innovative solutions and streamline workflows. Passionate about solving complex
+              problems and enhancing productivity with cutting-edge technology.
             </p>
-          
+
+            <motion.div className="flex flex-wrap gap-4 px-4 mt-6">
+              <motion.div
+                className="flex items-center bg-gray-800 rounded-full px-4 py-2"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <FaCode className="mr-2 text-purple-500" />
+                <span>Web Development</span>
+              </motion.div>
+              <motion.div
+                className="flex items-center bg-gray-800 rounded-full px-4 py-2"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <FaDatabase className="mr-2 text-pink-500" />
+                <span>Data Science</span>
+              </motion.div>
+              <motion.div
+                className="flex items-center bg-gray-800 rounded-full px-4 py-2"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <FaRocket className="mr-2 text-red-500" />
+                <span>Automation</span>
+              </motion.div>
+            </motion.div>
+
             <motion.button
-      className="bg-blue-600 ml-4 px-8 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300"
-      whileHover={{ scale: 1.05 }}
-    >
-      <Link href="/contact" passHref>
-       Contact Me
-      </Link>
-    </motion.button>
+              className="bg-gradient-to-r from-purple-500 to-pink-500 ml-4 px-8 text-white py-3 rounded-lg font-semibold hover:from-purple-600 hover:to-pink-600 transition duration-300"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Link href="/contact" passHref>
+                Contact Me
+              </Link>
+            </motion.button>
           </motion.div>
         </div>
       </div>
     </section>
-  );
+  )
 }
+

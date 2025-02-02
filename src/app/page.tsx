@@ -1,172 +1,294 @@
-"use client";
-import { motion } from 'framer-motion';
-import Head from "next/head";
+"use client"
+import { motion, useScroll, useTransform, useSpring, useMotionValue, useAnimationFrame } from "framer-motion"
+import Head from "next/head"
+import { useState, useEffect, useRef } from "react"
+import { FaRocket, FaChartBar, FaRobot, FaCode, FaDatabase, FaCog } from "react-icons/fa"
 
+const GradientText = ({ children, className }) => (
+  <motion.span
+    className={`bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 ${className}`}
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8 }}
+  >
+    {children}
+  </motion.span>
+)
 
+const AnimatedCard = ({ children, className, icon: Icon }) => {
+  const cardRef = useRef(null)
+  const x = useMotionValue(0)
+  const y = useMotionValue(0)
+
+  const mouseXSpring = useSpring(0)
+  const mouseYSpring = useSpring(0)
+
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["17.5deg", "-17.5deg"])
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-17.5deg", "17.5deg"])
+
+  const handleMouseMove = (e) => {
+    const rect = cardRef.current.getBoundingClientRect()
+    const width = rect.width
+    const height = rect.height
+    const mouseX = e.clientX - rect.left
+    const mouseY = e.clientY - rect.top
+    const xPct = mouseX / width - 0.5
+    const yPct = mouseY / height - 0.5
+    x.set(xPct)
+    y.set(yPct)
+  }
+
+  const handleMouseLeave = () => {
+    x.set(0)
+    y.set(0)
+  }
+
+  useAnimationFrame(() => {
+    mouseXSpring.set(x.get())
+    mouseYSpring.set(y.get())
+  })
+
+  return (
+    <motion.div
+      ref={cardRef}
+      className={`bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 p-1 rounded-2xl ${className}`}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      style={{
+        rotateX,
+        rotateY,
+        transformStyle: "preserve-3d",
+      }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
+      <div className="bg-gray-900 rounded-xl h-full p-6 transform-gpu" style={{ transform: "translateZ(75px)" }}>
+        <Icon className="text-4xl mb-4 text-purple-500" style={{ transform: "translateZ(50px)" }} />
+        {children}
+      </div>
+    </motion.div>
+  )
+}
+
+const FloatingIcon = ({ icon: Icon, delay }) => (
+  <motion.div
+    className="absolute text-4xl text-purple-500 opacity-50"
+    initial={{ y: 0, opacity: 0 }}
+    animate={{
+      y: [0, -20, 0],
+      opacity: [0, 1, 0],
+    }}
+    transition={{
+      duration: 3,
+      repeat: Number.POSITIVE_INFINITY,
+      delay: delay,
+    }}
+  >
+    <Icon />
+  </motion.div>
+)
 
 export default function Home() {
-   
+  const { scrollYProgress } = useScroll()
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
+  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.8])
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) return null
+
   return (
     <>
-    <Head>
-      <title>Silas Okanlawon</title>
-      <meta name="description" lang="eng" content="Portfolio of a Full Stack Web Developer and Data Scentist" />
-    </Head>
+      <Head>
+        <title>Silas Okanlawon - Full Stack Developer & Data Scientist</title>
+        <meta
+          name="description"
+          content="Portfolio of Silas Okanlawon - Full Stack Web Developer, Data Scientist, and Automation Specialist"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+          rel="stylesheet"
+        />
+      </Head>
 
-    <div className="bg-gray-700 min-h-screen bg-image text-white">
-      {/* Hero Section */}
-       <div className="py-10">
-       <section className="flex flex-col bg-gray-800 section items-center justify-center text-center my-30 py-20 space-y-4">
-        <motion.h1
-          className="text-blue-500 text-6xl font-extrabold font-cartoon glow"
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.5 }}
+      <div className="bg-gray-900 min-h-screen text-white font-['Poppins']">
+        {/* Hero Section */}
+        <motion.section
+          className="relative h-screen flex items-center justify-center overflow-hidden"
+          style={{ opacity, scale }}
         >
-          Welcome to My Portfolio
-        </motion.h1>
-        <motion.p
-          className="text-xl md:px-5 max-w-3xl px-2"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 1.5 }}
-        >
-          I’m a Full Stack Developer, Data Scientist, and Automation Specialist, offering dynamic web solutions, advanced data science, insightful analytics, seamless API integrations, custom task automations, efficient file and document management, and specialized bot development.
-        </motion.p>
-        <motion.a
-          className="bg-blue-700 px-8 py-3 rounded-lg font-semibold hover:bg-blue-900 transition duration-300"
-          whileHover={{ scale: 1.05 }}
-          href="/contact"
-        >
-          <a href="/resume.docx" download>Download CV</a>
-        </motion.a>
-      </section>
-      </div>
-
-      {/* Services Section */}
-      <section className="py-16 px-6 bg-gray-800">
-        <div className="max-w-7xl mx-auto text-center">
-          <motion.h2
-            className="text-4xl font-bold mb-8"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
-          >
-            Services I Offer
-          </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="absolute inset-0 z-0">
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-30"></div>
             <motion.div
-              className="bg-blue-700 p-6 rounded-lg shadow-lg"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.5 }}
+              className="absolute inset-0 bg-[url('/background-pattern.svg')] bg-repeat"
+              animate={{
+                backgroundPositionX: ["0%", "100%"],
+                backgroundPositionY: ["0%", "100%"],
+              }}
+              transition={{
+                repeat: Number.POSITIVE_INFINITY,
+                repeatType: "reverse",
+                duration: 20,
+              }}
+            ></motion.div>
+          </div>
+          <div className="z-10 text-center px-4">
+            <motion.h1
+              className="text-5xl md:text-7xl font-bold mb-6"
+              initial={{ opacity: 0, y: -50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1 }}
             >
-              <h3 className="text-2xl font-semibold mb-4">Web Development</h3>
-              <p>Developing seamless web applications with clean, modern code across front-end and back-end, ensuring efficient user experience</p>
-            </motion.div>
+              <GradientText>Welcome to My Portfolio</GradientText>
+            </motion.h1>
+            <motion.p
+              className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 1 }}
+            >
+              Full Stack Developer, Data Scientist, and Automation Specialist
+            </motion.p>
+            <motion.a
+              className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-3 rounded-full font-semibold text-lg hover:from-purple-600 hover:to-pink-600 transition duration-300 inline-block"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              href="/resume.docx"
+              download
+            >
+              Download CV
+            </motion.a>
+          </div>
+          <FloatingIcon icon={FaRocket} delay={0} />
+          <FloatingIcon icon={FaChartBar} delay={1} />
+          <FloatingIcon icon={FaRobot} delay={2} />
+        </motion.section>
 
+        {/* Services Section */}
+        <section className="py-20 px-4">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">
+              <GradientText>Services I Offer</GradientText>
+            </h2>
             <motion.div
-              className="bg-gray-700 p-6 rounded-lg shadow-lg"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.5 }}
+              className="grid grid-cols-1 md:grid-cols-3 gap-8"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
             >
-              <h3 className="text-2xl font-semibold mb-4"> Data Analysis</h3>
-              <p className="">
-              Building end-end comprehensive data analysis systems using modern and efficient coding practices.</p>
-            </motion.div>
-
-            <motion.div
-              className="bg-blue-700 p-6 rounded-lg shadow-lg"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.5 }}
-            >
-              <h3 className="text-2xl font-semibold mb-4">Python Automation</h3>
-              <p>Creating seamless automation solutions using Python, leveraging efficient and modern coding practices.</p>
+              <AnimatedCard icon={FaCode}>
+                <h3 className="text-2xl font-semibold mb-4">Web Development</h3>
+                <p>Crafting seamless web applications with clean, modern code for an efficient user experience.</p>
+              </AnimatedCard>
+              <AnimatedCard icon={FaDatabase}>
+                <h3 className="text-2xl font-semibold mb-4">Data Analysis</h3>
+                <p>Building comprehensive data analysis systems using cutting-edge practices and technologies.</p>
+              </AnimatedCard>
+              <AnimatedCard icon={FaCog}>
+                <h3 className="text-2xl font-semibold mb-4">Python Automation</h3>
+                <p>Creating efficient automation solutions leveraging Python's powerful ecosystem.</p>
+              </AnimatedCard>
             </motion.div>
           </div>
-        </div>
-      </section>
+        </section>
 
-     
-  <section className="py-10 px-6 bg-white">
-  <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">Projects & Solutions</h2>
-  <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-4">
-    
-    <motion.div className="bg-blue-700 rounded-lg shadow-md p-6"
-    whileHover={{ scale: 1.05 }}
-    transition={{ duration: 0.5 }}>
-      <h3 className="text-xl font-semibold">Automated Stock Price Notifier</h3>
-      <p className="mt-2">Built a Python script that retrieves stock prices periodically and updates a Google Sheet in real-time. Integrated with notification services for real-time alerts.</p>
-    </motion.div>
+        {/* Projects Section */}
+        <section className="py-20 px-4 bg-gray-800">
+          <div className="max-w-7xl mx-auto">
+            <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">
+              <GradientText>Projects & Solutions</GradientText>
+            </h2>
+            <motion.div
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.8, staggerChildren: 0.2 }}
+              viewport={{ once: true }}
+            >
+              {[
+                {
+                  title: "Automated Stock Price Notifier",
+                  description: "Real-time stock price updates with Google Sheets integration and notifications.",
+                  icon: FaChartBar,
+                },
+                {
+                  title: "Web Automation for Padel Club",
+                  description: "Automated court reservations using Selenium, with data logging to Google Sheets.",
+                  icon: FaRobot,
+                },
+                {
+                  title: "Image and Video Processing Suite",
+                  description: "Advanced solution for image retouching, video editing, and audio analysis.",
+                  icon: FaCode,
+                },
+                {
+                  title: "English Dictionary Desktop App",
+                  description: "User-friendly GUI application for offline dictionary access.",
+                  icon: FaDatabase,
+                },
+                {
+                  title: "Weather Forecast Web App",
+                  description: "Responsive Next.js application with real-time weather data and modern UI.",
+                  icon: FaRocket,
+                },
+                {
+                  title: "Data Visualization Dashboard",
+                  description: "Interactive dashboard providing real-time insights and analytics for business data.",
+                  icon: FaCog,
+                },
+              ].map((project, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  viewport={{ once: true }}
+                >
+                  <AnimatedCard className="h-full" icon={project.icon}>
+                    <h3 className="text-xl font-semibold mb-4">{project.title}</h3>
+                    <p>{project.description}</p>
+                  </AnimatedCard>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
 
-    <motion.div className="bg-gray-800 rounded-lg shadow-md p-6"
-    whileHover={{ scale: 1.05 }}
-    transition={{ duration: 0.5 }}>
-      <h3 className="text-xl font-semibold">Web Automation for Padel Club Court Reservations</h3>
-      <p className="mt-2">Automated court reservations with a Selenium Python script, logging data to Google Sheets every 45 minutes.</p>
-    </motion.div>
-
-    <motion.div className="bg-blue-700 rounded-lg shadow-md p-6"
-    whileHover={{ scale: 1.05 }}
-    transition={{ duration: 0.5 }}>
-      <h3 className="text-xl font-semibold">Image and Video Processing Suite</h3>
-      <p className="mt-2">Created a solution for image retouching, color correction, and video editing with transitions, including face censoring and audio mood analysis.</p>
-    </motion.div>
-
-    <motion.div className="bg-gray-800 rounded-lg shadow-md p-6"
-    whileHover={{ scale: 1.05 }}
-    transition={{ duration: 0.5 }}>
-      <h3 className="text-xl font-semibold">English Dictionary Desktop GUI Application</h3>
-      <p className="mt-2">Developed a desktop GUI app with Python for offline dictionary access. Integrated user-friendly interfaces and responsive design elements to optimize user experience.</p>
-    </motion.div>
-
-    <motion.div className="bg-blue-700 rounded-lg shadow-md p-6"
-    whileHover={{ scale: 1.05 }}
-    transition={{ duration: 0.5 }}>
-      <h3 className="text-xl font-semibold">Weather Forecast Web Application (Next.js)</h3>
-      <p className="mt-2">Built a responsive weather forecast application that fetches real-time weather data using Next.js and API integration. Designed with Tailwind CSS for a clean and modern interface.</p>
-    </motion.div>
-
-    <motion.div className="bg-gray-800 rounded-lg shadow-md p-6"
-    whileHover={{ scale: 1.05 }}
-    transition={{ duration: 0.5 }}>
-      <h3 className="text-xl font-semibold">Data Visualization Dashboard</h3>
-      <p className="mt-2">Constructed a data visualization dashboard with interactive charts, tables, and summaries. This dashboard provides real-time insights and analytics for business data, allowing users to draw insights from complex data sets.</p>
-    </motion.div>
-
-  </div>
-</section>
-
-       
-
-      {/* Call to Action */}
-      <section className="py-16 bg-white text-blue-950">
-        <div className="max-w-7xl mx-auto text-center">
-          <motion.h2
-            className="text-4xl font-bold mb-4"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
-          >
-            Ready to work with me?
-          </motion.h2>
-          <motion.p
-            className="text-lg mb-8"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
-          >
-            Let’s bring your ideas to life with creative solutions and modern web development.
-          </motion.p>
-          <motion.a
-            className="bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-950 transition duration-300"
-            whileHover={{ scale: 1.05 }}
-            href="/contact"
-          >
-            Get in Touch
-          </motion.a>
-        </div>
-      </section>
-    </div>
-  </>
-  );
+        {/* Call to Action */}
+        <section className="py-20 px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <motion.h2
+              className="text-4xl md:text-5xl font-bold mb-6"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+            >
+              <GradientText>Ready to Bring Your Ideas to Life?</GradientText>
+            </motion.h2>
+            <motion.p
+              className="text-xl mb-8"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.5, duration: 1 }}
+            >
+              Let's collaborate on creating innovative solutions with cutting-edge web development and data science.
+            </motion.p>
+            <motion.a
+              className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-3 rounded-full font-semibold text-lg hover:from-purple-600 hover:to-pink-600 transition duration-300 inline-block"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              href="/contact"
+            >
+              Get in Touch
+            </motion.a>
+          </div>
+        </section>
+      </div>
+    </>
+  )
 }
+

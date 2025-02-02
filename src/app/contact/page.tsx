@@ -4,6 +4,14 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import emailjs from 'emailjs-com'; 
 
+
+const GradientText = ({ children, className }) => (
+  <span
+    className={`bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 ${className}`}
+  >
+    {children}
+  </span>
+)
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: "",
@@ -45,7 +53,7 @@ export default function Contact() {
   };
 
   return (
-    <section className="bg-gray-100 py-20">
+    <section className="bg-gray-900 text-white py-20">
       <div className="container mx-auto px-4">
         {/* Section Heading */}
         <motion.h2
@@ -61,12 +69,12 @@ export default function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Contact Form */}
           <motion.div
-            className="bg-white p-6 rounded-lg shadow-lg"
+            className="bg-gray-700 text-white p-6 rounded-lg shadow-lg"
             initial={{ opacity: 0, x: -100 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
           >
-            <h3 className="text-2xl font-semibold text-gray-900 mb-6">
+            <h3 className="text-2xl font-semibold mb-6">
               Send me a message
             </h3>
             <form onSubmit={handleSubmit}>
@@ -78,7 +86,7 @@ export default function Contact() {
                   Name
                 </label>
                 <input
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className="shadow ring-2 ring-pink-700 text-white bg-clip-border bg-gradient-to-r from-purple-700 to-pink-700 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="name"
                   name="name"
                   type="text"
@@ -96,7 +104,7 @@ export default function Contact() {
                   Email
                 </label>
                 <input
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className="shadow ring-2 ring-pink-700 text-white bg-clip-border bg-gradient-to-r from-purple-700 to-pink-700 appearance-none border rounded w-full py-2 px-3  leading-tight focus:outline-none focus:shadow-outline"
                   id="email"
                   name="email"
                   type="email"
@@ -114,7 +122,7 @@ export default function Contact() {
                   Message
                 </label>
                 <textarea
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  className="shadow ring-2 ring-pink-700 text-white bg-clip-border bg-gradient-to-r from-purple-700 to-pink-700 appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="message"
                   name="message"
                   value={formData.message}
@@ -125,7 +133,7 @@ export default function Contact() {
 
               <div className="flex items-center justify-between">
                 <button
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  className="bg-gradient-to-r from-purple-600 via-pink-700 to-red-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                   type="submit"
                 >
                   Send Message
@@ -133,41 +141,41 @@ export default function Contact() {
               </div>
               {/* Status Message */}
               {status && (
-                <p className="mt-4 text-gray-600 font-semibold">{status}</p>
+                <p className="mt-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-500 via-pink-500 to-red-600 font-semibold">{status}</p>
               )}
             </form>
           </motion.div>
 
           {/* Contact Information */}
           <motion.div
-            className="bg-white p-6 rounded-lg shadow-lg"
+            className="bg-gray-700 text-white p-6 rounded-lg shadow-lg"
             initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
           >
-            <h3 className="text-2xl font-semibold text-gray-900 mb-6">
+            <h3 className="text-2xl font-semibold mb-6">
               Contact Information
             </h3>
 
             <div className="mb-4">
-              <h4 className="text-lg font-semibold text-gray-800">Email:</h4>
-              <p className="text-gray-600">silasokanla2006@gmail.com</p>
+              <h4 className="text-lg font-semibold">Email:</h4>
+              <p className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 via-pink-500 to-red-600">silasokanla2006@gmail.com</p>
             </div>
 
             <div className="mb-4">
-              <h4 className="text-lg font-semibold text-gray-800">Phone Number:</h4>
-              <p className="text-gray-600">+234 902 465 0039</p>
+              <h4 className="text-lg font-semibold">Phone Number:</h4>
+              <p className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 via-pink-500 to-red-600">+234 902 465 0039</p>
             </div>
 
             <div className="mb-4">
-              <h4 className="text-lg font-semibold text-gray-800">Upwork:</h4>
+              <h4 className="text-lg font-semibold">Upwork:</h4>
               <a href="https://www.upwork.com/freelancers/~0190e47b810764d48e?mp_source=share" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
                   My Upwork Profile
                 </a>
             </div>
 
             <div className="mb-4">
-              <h4 className="text-lg font-semibold text-gray-800">GitHub:</h4>
+              <h4 className="text-lg font-semibold">GitHub:</h4>
               <a href="https://github.com/CyberTycoon" target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
                   My GitHub Profile
                 </a>

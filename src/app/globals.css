@@ -15,51 +15,15 @@
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 text-gray-800;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.bg-image {
+  background-image: url("/background-pattern.svg");
+  background-repeat: repeat;
+  background-size: 200px 200px;
 }
 
-.bg-image{
-  background-image: url(/bg-image.jpg);
-  height: 100vh;
-  background-size: cover;
-  object-fit: cover;
-  background-size: contain;
-}
 
-@layer utilities {
-  .glow {
-    text-shadow: 0 0 5px #4833ea, 0 0 10px #4833ea, 0 0 20px #4833ea;
-  }
-}
 
-.section{
-  top: 80px;
-  margin: auto;
-  border: 3px solid #213dad;
-  left: 20%;
-  right: 20%;
-  width: 50%;
-  height: 70%;
-}
 
-@media screen and (max-width: 768px) {
-  .section{
-    left:auto;
-    right: auto;
-    width: 80%;
-    padding-top: 10;
-    padding-bottom: 10;
-    
-  }
-  .bg-image{
-    height: 100vh;
-  }
-}
