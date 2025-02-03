@@ -4,7 +4,25 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa"
 
-const GradientText = ({ children, className }) => (
+interface GradientTextProps {
+  children: React.ReactNode
+  className?: string
+}
+
+interface Project {
+  title: string
+  description: string
+  image: string
+  repo?: string
+  website?: string
+}
+
+interface ProjectCardProps {
+  project: Project
+  index: number
+}
+
+const GradientText: React.FC<GradientTextProps> = ({ children, className }) => (
   <span
     className={`bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 ${className}`}
   >
@@ -12,7 +30,7 @@ const GradientText = ({ children, className }) => (
   </span>
 )
 
-const ProjectCard = ({ project, index }) => (
+const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => (
   <motion.div
     className="bg-gray-800 rounded-xl overflow-hidden shadow-lg"
     initial={{ opacity: 0, y: 50 }}
@@ -61,8 +79,8 @@ const ProjectCard = ({ project, index }) => (
   </motion.div>
 )
 
-export default function Projects() {
-  const projects = [
+export default function Projects(): JSX.Element {
+  const projects: Project[] = [
     {
       title: "Swolenormous (Gym Site)",
       description:

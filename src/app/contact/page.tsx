@@ -1,10 +1,34 @@
 "use client"
+
 import { motion, useScroll, useTransform, useSpring, useMotionValue, useAnimationFrame } from "framer-motion"
 import Head from "next/head"
 import { useState, useEffect, useRef } from "react"
 import { FaRocket, FaChartBar, FaRobot, FaCode, FaDatabase, FaCog } from "react-icons/fa"
+import { IconType } from "react-icons"
 
-const GradientText = ({ children, className }) => (
+interface GradientTextProps {
+  children: React.ReactNode
+  className?: string
+}
+
+interface AnimatedCardProps {
+  children: React.ReactNode
+  className?: string
+  icon: IconType
+}
+
+interface FloatingIconProps {
+  icon: IconType
+  delay: number
+}
+
+interface Project {
+  title: string
+  description: string
+  icon: IconType
+}
+
+const GradientText: React.FC<GradientTextProps> = ({ children, className }) => (
   <motion.span
     className={`bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 ${className}`}
     initial={{ opacity: 0, y: 20 }}
@@ -15,8 +39,8 @@ const GradientText = ({ children, className }) => (
   </motion.span>
 )
 
-const AnimatedCard = ({ children, className, icon: Icon }) => {
-  const cardRef = useRef(null)
+const AnimatedCard: React.FC<AnimatedCardProps> = ({ children, className, icon: Icon }) => {
+  const cardRef = useRef<HTMLDivElement>(null)
   const x = useMotionValue(0)
   const y = useMotionValue(0)
 
@@ -26,7 +50,8 @@ const AnimatedCard = ({ children, className, icon: Icon }) => {
   const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["17.5deg", "-17.5deg"])
   const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-17.5deg", "17.5deg"])
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return
     const rect = cardRef.current.getBoundingClientRect()
     const width = rect.width
     const height = rect.height
@@ -70,7 +95,7 @@ const AnimatedCard = ({ children, className, icon: Icon }) => {
   )
 }
 
-const FloatingIcon = ({ icon: Icon, delay }) => (
+const FloatingIcon: React.FC<FloatingIconProps> = ({ icon: Icon, delay }) => (
   <motion.div
     className="absolute text-4xl text-purple-500 opacity-50"
     initial={{ y: 0, opacity: 0 }}
@@ -99,6 +124,39 @@ export default function Home() {
   }, [])
 
   if (!mounted) return null
+
+  const projects: Project[] = [
+    {
+      title: "Automated Stock Price Notifier",
+      description: "Real-time stock price updates with Google Sheets integration and notifications.",
+      icon: FaChartBar,
+    },
+    {
+      title: "Web Automation for Padel Club",
+      description: "Automated court reservations using Selenium, with data logging to Google Sheets.",
+      icon: FaRobot,
+    },
+    {
+      title: "Image and Video Processing Suite",
+      description: "Advanced solution for image retouching, video editing, and audio analysis.",
+      icon: FaCode,
+    },
+    {
+      title: "English Dictionary Desktop App",
+      description: "User-friendly GUI application for offline dictionary access.",
+      icon: FaDatabase,
+    },
+    {
+      title: "Weather Forecast Web App",
+      description: "Responsive Next.js application with real-time weather data and modern UI.",
+      icon: FaRocket,
+    },
+    {
+      title: "Data Visualization Dashboard",
+      description: "Interactive dashboard providing real-time insights and analytics for business data.",
+      icon: FaCog,
+    },
+  ]
 
   return (
     <>
@@ -209,38 +267,7 @@ export default function Home() {
               transition={{ duration: 0.8, staggerChildren: 0.2 }}
               viewport={{ once: true }}
             >
-              {[
-                {
-                  title: "Automated Stock Price Notifier",
-                  description: "Real-time stock price updates with Google Sheets integration and notifications.",
-                  icon: FaChartBar,
-                },
-                {
-                  title: "Web Automation for Padel Club",
-                  description: "Automated court reservations using Selenium, with data logging to Google Sheets.",
-                  icon: FaRobot,
-                },
-                {
-                  title: "Image and Video Processing Suite",
-                  description: "Advanced solution for image retouching, video editing, and audio analysis.",
-                  icon: FaCode,
-                },
-                {
-                  title: "English Dictionary Desktop App",
-                  description: "User-friendly GUI application for offline dictionary access.",
-                  icon: FaDatabase,
-                },
-                {
-                  title: "Weather Forecast Web App",
-                  description: "Responsive Next.js application with real-time weather data and modern UI.",
-                  icon: FaRocket,
-                },
-                {
-                  title: "Data Visualization Dashboard",
-                  description: "Interactive dashboard providing real-time insights and analytics for business data.",
-                  icon: FaCog,
-                },
-              ].map((project, index) => (
+              {projects.map((project, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
@@ -291,4 +318,3 @@ export default function Home() {
     </>
   )
 }
-

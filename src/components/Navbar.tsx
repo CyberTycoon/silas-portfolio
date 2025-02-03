@@ -1,46 +1,51 @@
-"use client"
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import { motion } from "framer-motion"
+"use client";
+import { useState, useEffect, MouseEvent } from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
 
-const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
+const Navbar: React.FC = () => {
+  // State for menu open/closed and if the navbar is scrolled
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [scrolled, setScrolled] = useState<boolean>(false);
 
-  const toggleMenu = (e) => {
-    e.stopPropagation()
-    setIsOpen(!isOpen)
-  }
+  // Toggle the mobile menu; we type the event as a MouseEvent for a button element.
+  const toggleMenu = (e: MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    setIsOpen(!isOpen);
+  };
 
+  // Listen for scroll events to update the navbar styling when scrolled
   useEffect(() => {
     const handleScroll = () => {
-      const isScrolled = window.scrollY > 10
+      const isScrolled = window.scrollY > 10;
       if (isScrolled !== scrolled) {
-        setScrolled(isScrolled)
+        setScrolled(isScrolled);
       }
-    }
+    };
 
-    document.addEventListener("scroll", handleScroll)
+    document.addEventListener("scroll", handleScroll);
     return () => {
-      document.removeEventListener("scroll", handleScroll)
-    }
-  }, [scrolled])
+      document.removeEventListener("scroll", handleScroll);
+    };
+  }, [scrolled]);
 
+  // Listen for clicks outside the nav to close the mobile menu
   useEffect(() => {
-    const handleOutsideClick = (event) => {
-      if (isOpen && !event.target.closest("nav")) {
-        setIsOpen(false)
+    const handleOutsideClick = (event: Event) => {
+      // Typecast the target as HTMLElement to use closest()
+      if (isOpen && !(event.target as HTMLElement).closest("nav")) {
+        setIsOpen(false);
       }
-    }
+    };
 
-    document.addEventListener("click", handleOutsideClick)
-
+    document.addEventListener("click", handleOutsideClick);
     return () => {
-      document.removeEventListener("click", handleOutsideClick)
-    }
-  }, [isOpen])
+      document.removeEventListener("click", handleOutsideClick);
+    };
+  }, [isOpen]);
 
-  const navItems = ["Home", "About", "Projects", "Services", "Contact"]
+  // List of navigation items
+  const navItems: string[] = ["Home", "About", "Projects", "Services", "Contact"];
 
   return (
     <motion.nav
@@ -54,7 +59,11 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <motion.div className="flex items-center" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+          <motion.div
+            className="flex items-center"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
             <Link href="/" className="flex items-center">
               <span className="text-white font-bold text-2xl">S</span>
               <span className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent font-bold text-3xl">
@@ -66,8 +75,12 @@ const Navbar = () => {
           {/* Desktop Menu */}
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
-              {navItems.map((item, index) => (
-                <motion.div key={item} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              {navItems.map((item) => (
+                <motion.div
+                  key={item}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
                   <Link
                     href={item === "Home" ? "/" : `/${item.toLowerCase()}`}
                     className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300"
@@ -96,7 +109,12 @@ const Navbar = () => {
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 6h16M4 12h16m-7 6h7"
+                  />
                 </svg>
               ) : (
                 <svg
@@ -106,7 +124,12 @@ const Navbar = () => {
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 </svg>
               )}
             </motion.button>
@@ -134,8 +157,7 @@ const Navbar = () => {
         </div>
       </motion.div>
     </motion.nav>
-  )
-}
+  );
+};
 
-export default Navbar
-
+export default Navbar;

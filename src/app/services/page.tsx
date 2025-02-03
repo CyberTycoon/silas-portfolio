@@ -1,9 +1,25 @@
-"use client";
+"use client"
 
-import { motion } from "framer-motion";
-import { FaCode, FaRobot, FaBrain, FaChartBar, FaSpider, FaImage } from "react-icons/fa";
+import { motion } from "framer-motion"
+import { FaCode, FaRobot, FaBrain, FaChartBar, FaSpider, FaImage } from "react-icons/fa"
+import { IconType } from "react-icons"
 
-const GradientText = ({ children, className }) => (
+interface GradientTextProps {
+  children: React.ReactNode
+  className?: string
+}
+
+interface Service {
+  title: string
+  description: string
+  icon: IconType
+}
+
+interface ServiceCardProps extends Service {
+  index: number
+}
+
+const GradientText: React.FC<GradientTextProps> = ({ children, className }) => (
   <span
     className={`bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 ${className}`}
   >
@@ -11,7 +27,7 @@ const GradientText = ({ children, className }) => (
   </span>
 )
 
-const ServiceCard = ({ title, description, icon: Icon, index }) => (
+const ServiceCard: React.FC<ServiceCardProps> = ({ title, description, icon: Icon, index }) => (
   <motion.div
     className="bg-gray-800 p-6 rounded-xl shadow-lg"
     initial={{ opacity: 0, y: 50 }}
@@ -27,8 +43,8 @@ const ServiceCard = ({ title, description, icon: Icon, index }) => (
   </motion.div>
 )
 
-export default function Services() {
-  const services = [
+export default function Services(): JSX.Element {
+  const services: Service[] = [
     {
       title: "Full Stack Web Development",
       description: "I create responsive, scalable web applications using modern frameworks, from front-end to back-end, managing the entire development cycle.",
@@ -59,7 +75,7 @@ export default function Services() {
       description: "Offering comprehensive services for image retouching, video editing, and audio enhancement.",
       icon: FaImage
     }
-  ];
+  ]
 
   return (
     <section className="bg-gray-900 text-white py-20 min-h-screen">
@@ -80,5 +96,5 @@ export default function Services() {
         </div>
       </div>
     </section>
-  );
+  )
 }

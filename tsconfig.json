@@ -29,7 +29,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-, "src/app/projects/page.jsx", "src/app/services/page.jsx", "src/app/page.jsx", "src/components/Navbar.jsx", "src/app/contact/page.jsx", "src/app/about/page.jsx"  ],
+, "src/app/projects/page.tsx", "src/app/services/page.tsx", "src/app/page.tsx", "src/components/Navbar.tsx", "src/app/contact/page.tsx", "src/app/about/page.tsx"  ],
   "exclude": [
     "node_modules"
   ]
