@@ -229,7 +229,9 @@ const Home: NextPage = () => {
               </AnimatedCard>
               <AnimatedCard icon={FaCog}>
                 <h3 className="text-2xl font-semibold mb-4">Python Automation</h3>
-                <p>Creating efficient automation solutions leveraging Python's powerful ecosystem.</p>
+                <p>
+                  Creating efficient automation solutions leveraging Python&apos;s powerful ecosystem.
+                </p>
               </AnimatedCard>
             </motion.div>
           </div>
@@ -239,7 +241,7 @@ const Home: NextPage = () => {
         <section className="py-20 px-4 bg-gray-800">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">
-              <GradientText>Projects & Solutions</GradientText>
+              <GradientText>Projects &amp; Solutions</GradientText>
             </h2>
             <motion.div
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
