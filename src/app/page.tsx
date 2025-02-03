@@ -148,7 +148,8 @@ const Home: NextPage = () => {
         />
       </Head>
 
-      <div className="bg-gray-900 min-h-screen text-white font-['Poppins']">
+      {/* Updated font class to use escaped double quotes for Poppins */}
+      <div className="bg-gray-900 min-h-screen text-white font-[&quot;Poppins&quot;]">
         {/* Hero Section */}
         <motion.section
           className="relative h-screen flex items-center justify-center overflow-hidden"
@@ -318,7 +319,7 @@ const Home: NextPage = () => {
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.5, duration: 1 }}
             >
-              Let's collaborate on creating innovative solutions with cutting-edge web development and data science.
+              Let&apos;s collaborate on creating innovative solutions with cutting-edge web development and data science.
             </motion.p>
             <motion.a
               className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-3 rounded-full font-semibold text-lg hover:from-purple-600 hover:to-pink-600 transition duration-300 inline-block"

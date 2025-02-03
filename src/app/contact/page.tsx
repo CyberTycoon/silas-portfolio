@@ -1,320 +1,211 @@
-"use client"
+"use client"; // Ensure client-side rendering
 
-import { motion, useScroll, useTransform, useSpring, useMotionValue, useAnimationFrame } from "framer-motion"
-import Head from "next/head"
-import { useState, useEffect, useRef } from "react"
-import { FaRocket, FaChartBar, FaRobot, FaCode, FaDatabase, FaCog } from "react-icons/fa"
-import { IconType } from "react-icons"
+import { motion } from "framer-motion";
+import { useState } from "react";
+import emailjs from "emailjs-com";
 
-interface GradientTextProps {
-  children: React.ReactNode
-  className?: string
+// Define an interface for the form data
+interface FormData {
+  name: string;
+  email: string;
+  message: string;
 }
 
-interface AnimatedCardProps {
-  children: React.ReactNode
-  className?: string
-  icon: IconType
-}
+export default function Contact(): JSX.Element {
+  // Initialize form data and status state
+  const [formData, setFormData] = useState<FormData>({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [status, setStatus] = useState<string>("");
 
-interface FloatingIconProps {
-  icon: IconType
-  delay: number
-}
+  // Update formData when an input or textarea changes
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ): void => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
-interface Project {
-  title: string
-  description: string
-  icon: IconType
-}
+  // Handle form submission asynchronously
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
+    e.preventDefault();
 
-const GradientText: React.FC<GradientTextProps> = ({ children, className }) => (
-  <motion.span
-    className={`bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 ${className}`}
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.8 }}
-  >
-    {children}
-  </motion.span>
-)
+    try {
+      setStatus("Sending...");
 
-const AnimatedCard: React.FC<AnimatedCardProps> = ({ children, className, icon: Icon }) => {
-  const cardRef = useRef<HTMLDivElement>(null)
-  const x = useMotionValue(0)
-  const y = useMotionValue(0)
+      const templateParams = {
+        name: formData.name,
+        email: formData.email,
+        message: formData.message,
+      };
 
-  const mouseXSpring = useSpring(0)
-  const mouseYSpring = useSpring(0)
+      // Send the email using emailjs
+      const response = await emailjs.send(
+        "service_43l9hbf",
+        "template_prcg8uu",
+        templateParams,
+        "ufiaDgchPLDjfXehB"
+      );
 
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["17.5deg", "-17.5deg"])
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-17.5deg", "17.5deg"])
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return
-    const rect = cardRef.current.getBoundingClientRect()
-    const width = rect.width
-    const height = rect.height
-    const mouseX = e.clientX - rect.left
-    const mouseY = e.clientY - rect.top
-    const xPct = mouseX / width - 0.5
-    const yPct = mouseY / height - 0.5
-    x.set(xPct)
-    y.set(yPct)
-  }
-
-  const handleMouseLeave = () => {
-    x.set(0)
-    y.set(0)
-  }
-
-  useAnimationFrame(() => {
-    mouseXSpring.set(x.get())
-    mouseYSpring.set(y.get())
-  })
+      // Check response for success
+      if (response.status === 200) {
+        setTimeout(() => setStatus("Message sent successfully!"), 2000);
+      } else {
+        throw new Error("Failed to send message.");
+      }
+    } catch (error) {
+      console.error("Error sending message:", error);
+      setStatus("Failed to send message.");
+    }
+  };
 
   return (
-    <motion.div
-      ref={cardRef}
-      className={`bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 p-1 rounded-2xl ${className}`}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      style={{
-        rotateX,
-        rotateY,
-        transformStyle: "preserve-3d",
-      }}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-    >
-      <div className="bg-gray-900 rounded-xl h-full p-6 transform-gpu" style={{ transform: "translateZ(75px)" }}>
-        <Icon className="text-4xl mb-4 text-purple-500" style={{ transform: "translateZ(50px)" }} />
-        {children}
-      </div>
-    </motion.div>
-  )
-}
-
-const FloatingIcon: React.FC<FloatingIconProps> = ({ icon: Icon, delay }) => (
-  <motion.div
-    className="absolute text-4xl text-purple-500 opacity-50"
-    initial={{ y: 0, opacity: 0 }}
-    animate={{
-      y: [0, -20, 0],
-      opacity: [0, 1, 0],
-    }}
-    transition={{
-      duration: 3,
-      repeat: Number.POSITIVE_INFINITY,
-      delay: delay,
-    }}
-  >
-    <Icon />
-  </motion.div>
-)
-
-export default function Home() {
-  const { scrollYProgress } = useScroll()
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.8])
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  if (!mounted) return null
-
-  const projects: Project[] = [
-    {
-      title: "Automated Stock Price Notifier",
-      description: "Real-time stock price updates with Google Sheets integration and notifications.",
-      icon: FaChartBar,
-    },
-    {
-      title: "Web Automation for Padel Club",
-      description: "Automated court reservations using Selenium, with data logging to Google Sheets.",
-      icon: FaRobot,
-    },
-    {
-      title: "Image and Video Processing Suite",
-      description: "Advanced solution for image retouching, video editing, and audio analysis.",
-      icon: FaCode,
-    },
-    {
-      title: "English Dictionary Desktop App",
-      description: "User-friendly GUI application for offline dictionary access.",
-      icon: FaDatabase,
-    },
-    {
-      title: "Weather Forecast Web App",
-      description: "Responsive Next.js application with real-time weather data and modern UI.",
-      icon: FaRocket,
-    },
-    {
-      title: "Data Visualization Dashboard",
-      description: "Interactive dashboard providing real-time insights and analytics for business data.",
-      icon: FaCog,
-    },
-  ]
-
-  return (
-    <>
-      <Head>
-        <title>Silas Okanlawon - Full Stack Developer & Data Scientist</title>
-        <meta
-          name="description"
-          content="Portfolio of Silas Okanlawon - Full Stack Web Developer, Data Scientist, and Automation Specialist"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
-          rel="stylesheet"
-        />
-      </Head>
-
-      <div className="bg-gray-900 min-h-screen text-white font-['Poppins']">
-        {/* Hero Section */}
-        <motion.section
-          className="relative h-screen flex items-center justify-center overflow-hidden"
-          style={{ opacity, scale }}
+    <section className="bg-gray-900 text-white py-20">
+      <div className="container mx-auto px-4">
+        {/* Section Heading */}
+        <motion.h2
+          className="text-4xl font-bold text-center text-gray-900 mb-12"
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
         >
-          <div className="absolute inset-0 z-0">
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-30"></div>
-            <motion.div
-              className="absolute inset-0 bg-[url('/background-pattern.svg')] bg-repeat"
-              animate={{
-                backgroundPositionX: ["0%", "100%"],
-                backgroundPositionY: ["0%", "100%"],
-              }}
-              transition={{
-                repeat: Number.POSITIVE_INFINITY,
-                repeatType: "reverse",
-                duration: 20,
-              }}
-            ></motion.div>
-          </div>
-          <div className="z-10 text-center px-4">
-            <motion.h1
-              className="text-5xl md:text-7xl font-bold mb-6"
-              initial={{ opacity: 0, y: -50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1 }}
-            >
-              <GradientText>Welcome to My Portfolio</GradientText>
-            </motion.h1>
-            <motion.p
-              className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto"
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 1 }}
-            >
-              Full Stack Developer, Data Scientist, and Automation Specialist
-            </motion.p>
-            <motion.a
-              className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-3 rounded-full font-semibold text-lg hover:from-purple-600 hover:to-pink-600 transition duration-300 inline-block"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              href="/resume.docx"
-              download
-            >
-              Download CV
-            </motion.a>
-          </div>
-          <FloatingIcon icon={FaRocket} delay={0} />
-          <FloatingIcon icon={FaChartBar} delay={1} />
-          <FloatingIcon icon={FaRobot} delay={2} />
-        </motion.section>
+          Contact Me
+        </motion.h2>
 
-        {/* Services Section */}
-        <section className="py-20 px-4">
-          <div className="max-w-7xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">
-              <GradientText>Services I Offer</GradientText>
-            </h2>
-            <motion.div
-              className="grid grid-cols-1 md:grid-cols-3 gap-8"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <AnimatedCard icon={FaCode}>
-                <h3 className="text-2xl font-semibold mb-4">Web Development</h3>
-                <p>Crafting seamless web applications with clean, modern code for an efficient user experience.</p>
-              </AnimatedCard>
-              <AnimatedCard icon={FaDatabase}>
-                <h3 className="text-2xl font-semibold mb-4">Data Analysis</h3>
-                <p>Building comprehensive data analysis systems using cutting-edge practices and technologies.</p>
-              </AnimatedCard>
-              <AnimatedCard icon={FaCog}>
-                <h3 className="text-2xl font-semibold mb-4">Python Automation</h3>
-                <p>Creating efficient automation solutions leveraging Python's powerful ecosystem.</p>
-              </AnimatedCard>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* Projects Section */}
-        <section className="py-20 px-4 bg-gray-800">
-          <div className="max-w-7xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">
-              <GradientText>Projects & Solutions</GradientText>
-            </h2>
-            <motion.div
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.8, staggerChildren: 0.2 }}
-              viewport={{ once: true }}
-            >
-              {projects.map((project, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                  viewport={{ once: true }}
+        {/* Contact Form and Info */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Contact Form */}
+          <motion.div
+            className="bg-gray-700 text-white p-6 rounded-lg shadow-lg"
+            initial={{ opacity: 0, x: -100 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1 }}
+          >
+            <h3 className="text-2xl font-semibold mb-6">Send me a message</h3>
+            <form onSubmit={handleSubmit}>
+              <div className="mb-4">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="name"
                 >
-                  <AnimatedCard className="h-full" icon={project.icon}>
-                    <h3 className="text-xl font-semibold mb-4">{project.title}</h3>
-                    <p>{project.description}</p>
-                  </AnimatedCard>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
-        </section>
+                  Name
+                </label>
+                <input
+                  className="shadow ring-2 ring-pink-700 text-white bg-clip-border bg-gradient-to-r from-purple-700 to-pink-700 appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+                  id="name"
+                  name="name"
+                  type="text"
+                  value={formData.name}
+                  onChange={handleChange}
+                  placeholder="Your Name"
+                />
+              </div>
 
-        {/* Call to Action */}
-        <section className="py-20 px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.h2
-              className="text-4xl md:text-5xl font-bold mb-6"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 1 }}
-            >
-              <GradientText>Ready to Bring Your Ideas to Life?</GradientText>
-            </motion.h2>
-            <motion.p
-              className="text-xl mb-8"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.5, duration: 1 }}
-            >
-              Let's collaborate on creating innovative solutions with cutting-edge web development and data science.
-            </motion.p>
-            <motion.a
-              className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-3 rounded-full font-semibold text-lg hover:from-purple-600 hover:to-pink-600 transition duration-300 inline-block"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              href="/contact"
-            >
-              Get in Touch
-            </motion.a>
-          </div>
-        </section>
+              <div className="mb-4">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="email"
+                >
+                  Email
+                </label>
+                <input
+                  className="shadow ring-2 ring-pink-700 text-white bg-clip-border bg-gradient-to-r from-purple-700 to-pink-700 appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+                  id="email"
+                  name="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="Your Email"
+                />
+              </div>
+
+              <div className="mb-6">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="message"
+                >
+                  Message
+                </label>
+                <textarea
+                  className="shadow ring-2 ring-pink-700 text-white bg-clip-border bg-gradient-to-r from-purple-700 to-pink-700 appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  placeholder="Your Message"
+                ></textarea>
+              </div>
+
+              <div className="flex items-center justify-between">
+                <button
+                  className="bg-gradient-to-r from-purple-600 via-pink-700 to-red-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  type="submit"
+                >
+                  Send Message
+                </button>
+              </div>
+              {/* Status Message */}
+              {status && (
+                <p className="mt-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-500 via-pink-500 to-red-600 font-semibold">
+                  {status}
+                </p>
+              )}
+            </form>
+          </motion.div>
+
+          {/* Contact Information */}
+          <motion.div
+            className="bg-gray-700 text-white p-6 rounded-lg shadow-lg"
+            initial={{ opacity: 0, x: 100 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1 }}
+          >
+            <h3 className="text-2xl font-semibold mb-6">Contact Information</h3>
+
+            <div className="mb-4">
+              <h4 className="text-lg font-semibold">Email:</h4>
+              <p className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 via-pink-500 to-red-600">
+                silasokanla2006@gmail.com
+              </p>
+            </div>
+
+            <div className="mb-4">
+              <h4 className="text-lg font-semibold">Phone Number:</h4>
+              <p className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 via-pink-500 to-red-600">
+                +234 902 465 0039
+              </p>
+            </div>
+
+            <div className="mb-4">
+              <h4 className="text-lg font-semibold">Upwork:</h4>
+              <a
+                href="https://www.upwork.com/freelancers/~0190e47b810764d48e?mp_source=share"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-500 hover:underline"
+              >
+                My Upwork Profile
+              </a>
+            </div>
+
+            <div className="mb-4">
+              <h4 className="text-lg font-semibold">GitHub:</h4>
+              <a
+                href="https://github.com/CyberTycoon"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-500 hover:underline"
+              >
+                My GitHub Profile
+              </a>
+            </div>
+          </motion.div>
+        </div>
       </div>
-    </>
-  )
+    </section>
+  );
 }
