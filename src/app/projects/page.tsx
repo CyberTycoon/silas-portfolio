@@ -78,6 +78,15 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => (
 export default function Projects(): JSX.Element {
   const projects: Project[] = [
     {
+      title: "Weather Forecast Web Application",
+      description:
+        "Built a responsive weather forecast application using Next.js and API integration, designed with Tailwind CSS for a modern interface.",
+      image: "/data (2).jpg",
+      repo: "https://github.com/CyberTycoon/weatherApp.git",
+      website: "https://weather-watch-seven.vercel.app/",
+    },
+  
+    {
       title: "Swolenormous (Gym Site)",
       description:
         "Developed an engaging and responsive gym site with dynamic features like class scheduling, membership management, and fitness tracking.",
@@ -121,14 +130,7 @@ export default function Projects(): JSX.Element {
       image: "/dictionary.png",
       repo: "https://github.com/CyberTycoon/Python-Dictionary-GUI.git",
     },
-    {
-      title: "Weather Forecast Web Application",
-      description:
-        "Built a responsive weather forecast application using Next.js and API integration, designed with Tailwind CSS for a modern interface.",
-      image: "/data (2).jpg",
-      repo: "https://github.com/CyberTycoon/weatherApp.git",
-      website: "https://weather-watch-seven.vercel.app/",
-    },
+
     {
       title: "Data Visualization Dashboard",
       description:
