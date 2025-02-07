@@ -11,8 +11,16 @@ interface FormData {
   message: string;
 }
 
+
+
 export default function Contact(): JSX.Element {
   // Initialize form data and status state
+  const gradientTextStyle = {
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+  };
+  
+
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
@@ -168,14 +176,14 @@ export default function Contact(): JSX.Element {
 
             <div className="mb-4">
               <h4 className="text-lg font-semibold">Email:</h4>
-              <p className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 via-pink-500 to-red-600">
+              <p style={gradientTextStyle} className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 via-pink-500 to-red-600">
                 silasokanla2006@gmail.com
               </p>
             </div>
 
             <div className="mb-4">
               <h4 className="text-lg font-semibold">Phone Number:</h4>
-              <p className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 via-pink-500 to-red-600">
+              <p style={gradientTextStyle} className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 via-pink-500 to-red-600">
                 +234 902 465 0039
               </p>
             </div>
