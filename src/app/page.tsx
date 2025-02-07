@@ -208,9 +208,9 @@ const Home: NextPage = () => {
                 </p>
               </AnimatedCard>
               <AnimatedCard icon={FaDatabase}>
-                <h3 className="text-2xl font-semibold mb-4">Data Analysis</h3>
+                <h3 className="text-2xl font-semibold mb-4">Data Science</h3>
                 <p>
-                  Building comprehensive data analysis systems using cutting-edge practices and technologies.
+                  Building comprehensive data science systems using cutting-edge practices and technologies.
                 </p>
               </AnimatedCard>
               <AnimatedCard icon={FaCog}>
