@@ -1,34 +1,27 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import Image from "next/image"
-import { FaGithub, FaExternalLinkAlt } from "react-icons/fa"
-
-interface GradientTextProps {
-  children: React.ReactNode
-  className?: string
-}
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 
 interface Project {
-  title: string
-  description: string
-  image: string
-  repo?: string
-  website?: string
+  title: string;
+  description: string;
+  image: string;
+  repo?: string;
+  website?: string;
 }
 
 interface ProjectCardProps {
-  project: Project
-  index: number
+  project: Project;
+  index: number;
 }
 
-const GradientText: React.FC<GradientTextProps> = ({ children, className }) => (
-  <span
-    className={`bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 ${className}`}
-  >
-    {children}
-  </span>
-)
+// Inline style for gradient text to ensure mobile compatibility
+const gradientTextStyle = {
+  WebkitBackgroundClip: "text",
+  WebkitTextFillColor: "transparent",
+};
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => (
   <motion.div
@@ -47,8 +40,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => (
       />
     </div>
     <div className="p-6">
-      <h3 className="text-xl font-semibold mb-2">
-        <GradientText>{project.title}</GradientText>
+      <h3
+        className="text-xl font-semibold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500"
+        style={gradientTextStyle}
+      >
+        {project.title}
       </h3>
       <p className="text-gray-300 text-sm mb-4">{project.description}</p>
       <div className="flex justify-between items-center">
@@ -77,7 +73,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index }) => (
       </div>
     </div>
   </motion.div>
-)
+);
 
 export default function Projects(): JSX.Element {
   const projects: Project[] = [
@@ -114,7 +110,7 @@ export default function Projects(): JSX.Element {
     {
       title: "Image and Video Processing Suite",
       description:
-        "Created a comprehensive solution for image retouching, video editing, face censoring, and mood analysis from audio.",
+        "Created a comprehensive solution for image retouching, video editing, face censoring, and audio analysis.",
       image: "/imageProcessing.jpg",
       repo: "https://github.com/CyberTycoon/image-video-processing.git",
     },
@@ -140,18 +136,19 @@ export default function Projects(): JSX.Element {
       image: "/data.jpg",
       repo: "https://github.com/CyberTycoon/My-Dashboard.git",
     },
-  ]
+  ];
 
   return (
     <section className="bg-gray-900 text-white py-20 min-h-screen">
       <div className="container mx-auto px-4">
         <motion.h2
-          className="text-4xl md:text-5xl font-bold text-center mb-12"
+          className="text-4xl md:text-5xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500"
+          style={gradientTextStyle}
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          <GradientText>My Projects</GradientText>
+          My Projects
         </motion.h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -161,5 +158,5 @@ export default function Projects(): JSX.Element {
         </div>
       </div>
     </section>
-  )
+  );
 }

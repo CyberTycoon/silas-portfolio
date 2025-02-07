@@ -95,7 +95,7 @@ export default function Contact(): JSX.Element {
                   Name
                 </label>
                 <input
-                  className="shadow ring-2 ring-pink-700 text-white bg-clip-border bg-gradient-to-r from-purple-700 to-pink-700 appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+                  className="shadow ring-2 ring-pink-700 text-white bg-clip-border bg-purple-500 appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
                   id="name"
                   name="name"
                   type="text"
@@ -113,7 +113,7 @@ export default function Contact(): JSX.Element {
                   Email
                 </label>
                 <input
-                  className="shadow ring-2 ring-pink-700 text-white bg-clip-border bg-gradient-to-r from-purple-700 to-pink-700 appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+                  className="shadow ring-2 ring-pink-700 text-white bg-clip-border bg-purple-500 appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
                   id="email"
                   name="email"
                   type="email"
@@ -131,7 +131,7 @@ export default function Contact(): JSX.Element {
                   Message
                 </label>
                 <textarea
-                  className="shadow ring-2 ring-pink-700 text-white bg-clip-border bg-gradient-to-r from-purple-700 to-pink-700 appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+                  className="shadow ring-2 ring-pink-700 text-white bg-clip-border bg-purple-500 appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
                   id="message"
                   name="message"
                   value={formData.message}

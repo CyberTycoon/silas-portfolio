@@ -1,33 +1,10 @@
 "use client";
+
 import { motion, useScroll, useTransform, useSpring, useMotionValue, useAnimationFrame } from "framer-motion";
 import Head from "next/head";
 import { useState, useEffect, useRef, ReactNode, ComponentType, MouseEvent } from "react";
 import { FaRocket, FaChartBar, FaRobot, FaCode, FaDatabase, FaCog } from "react-icons/fa";
 import type { NextPage } from "next";
-
-// ----------------------------------------------
-// GradientText Component
-// ----------------------------------------------
-
-interface GradientTextProps {
-  children: ReactNode;
-  className?: string;
-}
-
-const GradientText: React.FC<GradientTextProps> = ({ children, className = "" }) => (
-  <motion.span
-    className={`bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 ${className}`}
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.8 }}
-  >
-    {children}
-  </motion.span>
-);
-
-// ----------------------------------------------
-// AnimatedCard Component
-// ----------------------------------------------
 
 interface AnimatedCardProps {
   children: ReactNode;
@@ -134,6 +111,12 @@ const Home: NextPage = () => {
 
   if (!mounted) return null;
 
+  // Inline style to ensure vendor prefixes on gradient text for mobile
+  const gradientTextStyle = {
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+  };
+
   return (
     <>
       <Head>
@@ -148,8 +131,7 @@ const Home: NextPage = () => {
         />
       </Head>
 
-      {/* Updated font class to use escaped double quotes for Poppins */}
-      <div className="bg-gray-900 min-h-screen text-white font-[&quot;Poppins&quot;]">
+      <div className="bg-gray-900 min-h-screen text-white font-[Poppins]">
         {/* Hero Section */}
         <motion.section
           className="relative h-screen flex items-center justify-center overflow-hidden"
@@ -172,12 +154,13 @@ const Home: NextPage = () => {
           </div>
           <div className="z-10 text-center px-4">
             <motion.h1
-              className="text-5xl md:text-7xl font-bold mb-6"
+              className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500"
+              style={gradientTextStyle}
               initial={{ opacity: 0, y: -50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1 }}
             >
-              <GradientText>Welcome to My Portfolio</GradientText>
+              Welcome to My Portfolio
             </motion.h1>
             <motion.p
               className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto"
@@ -205,8 +188,11 @@ const Home: NextPage = () => {
         {/* Services Section */}
         <section className="py-20 px-4">
           <div className="max-w-7xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">
-              <GradientText>Services I Offer</GradientText>
+            <h2
+              className="text-4xl md:text-5xl font-bold mb-12 text-center bg-gradient-to-r from-purple-400 via-pink-500 to-red-500"
+              style={gradientTextStyle}
+            >
+              Services I Offer
             </h2>
             <motion.div
               className="grid grid-cols-1 md:grid-cols-3 gap-8"
@@ -240,8 +226,11 @@ const Home: NextPage = () => {
         {/* Projects Section */}
         <section className="py-20 px-4 bg-gray-800">
           <div className="max-w-7xl mx-auto">
-            <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">
-              <GradientText>Projects &amp; Solutions</GradientText>
+            <h2
+              className="text-4xl md:text-5xl font-bold mb-12 text-center bg-gradient-to-r from-purple-400 via-pink-500 to-red-500"
+              style={gradientTextStyle}
+            >
+              Projects &amp; Solutions
             </h2>
             <motion.div
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
@@ -271,7 +260,8 @@ const Home: NextPage = () => {
                 },
                 {
                   title: "English Dictionary Desktop App",
-                  description: "User-friendly GUI application for offline dictionary access.",
+                  description:
+                    "User-friendly GUI application for offline dictionary access.",
                   icon: FaDatabase,
                 },
                 {
@@ -295,7 +285,12 @@ const Home: NextPage = () => {
                   viewport={{ once: true }}
                 >
                   <AnimatedCard className="h-full" icon={project.icon}>
-                    <h3 className="text-xl font-semibold mb-4">{project.title}</h3>
+                    <h3
+                      className="text-xl font-semibold mb-4 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500"
+                      style={gradientTextStyle}
+                    >
+                      {project.title}
+                    </h3>
                     <p>{project.description}</p>
                   </AnimatedCard>
                 </motion.div>
@@ -308,12 +303,13 @@ const Home: NextPage = () => {
         <section className="py-20 px-4">
           <div className="max-w-4xl mx-auto text-center">
             <motion.h2
-              className="text-4xl md:text-5xl font-bold mb-6"
+              className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500"
+              style={gradientTextStyle}
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ duration: 1 }}
             >
-              <GradientText>Ready to Bring Your Ideas to Life?</GradientText>
+              Ready to Bring Your Ideas to Life?
             </motion.h2>
             <motion.p
               className="text-xl mb-8"

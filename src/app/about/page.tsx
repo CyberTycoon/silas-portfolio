@@ -1,23 +1,29 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import Image from "next/image"
-import Link from "next/link"
-import { FaRocket, FaCode, FaDatabase } from "react-icons/fa"
-
+import { motion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+import { FaRocket, FaCode, FaDatabase } from "react-icons/fa";
 
 export default function About() {
+  // Inline style to ensure gradient text renders on mobile devices
+  const gradientTextStyle = {
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+  };
+
   return (
     <section className="bg-gray-900 py-20 text-white min-h-screen">
       <div className="container mx-auto px-4">
         {/* Section Heading */}
         <motion.h2
-          className="text-4xl font-bold text-center mb-12"
+          className="text-4xl font-bold text-center mb-12 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500"
+          style={gradientTextStyle}
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          <h1 className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">About Me</h1>
+          About Me
         </motion.h2>
 
         {/* About Content */}
@@ -45,8 +51,11 @@ export default function About() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
           >
-            <h3 className="text-2xl px-4 font-semibold">
-              <h1 className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">SOFTWARE ENGINEER</h1>
+            <h3
+              className="text-2xl px-4 font-semibold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500"
+              style={gradientTextStyle}
+            >
+              SOFTWARE ENGINEER
             </h3>
             <p className="text-lg px-4 text-gray-300">
               I am Silas Okanlawon, a versatile software developer with expertise in web development, data science, and
@@ -96,6 +105,5 @@ export default function About() {
         </div>
       </div>
     </section>
-  )
+  );
 }
-

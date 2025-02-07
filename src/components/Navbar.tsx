@@ -1,14 +1,21 @@
 "use client";
+
 import { useState, useEffect, MouseEvent } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+
+// Inline style for gradient text for mobile compatibility
+const gradientTextStyle = {
+  WebkitBackgroundClip: "text",
+  WebkitTextFillColor: "transparent",
+};
 
 const Navbar: React.FC = () => {
   // State for menu open/closed and if the navbar is scrolled
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [scrolled, setScrolled] = useState<boolean>(false);
 
-  // Toggle the mobile menu; we type the event as a MouseEvent for a button element.
+  // Toggle the mobile menu
   const toggleMenu = (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     setIsOpen(!isOpen);
@@ -32,7 +39,6 @@ const Navbar: React.FC = () => {
   // Listen for clicks outside the nav to close the mobile menu
   useEffect(() => {
     const handleOutsideClick = (event: Event) => {
-      // Typecast the target as HTMLElement to use closest()
       if (isOpen && !(event.target as HTMLElement).closest("nav")) {
         setIsOpen(false);
       }
@@ -66,7 +72,10 @@ const Navbar: React.FC = () => {
           >
             <Link href="/" className="flex items-center">
               <span className="text-white font-bold text-2xl">S</span>
-              <span className="bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent font-bold text-3xl">
+              <span
+                className="bg-gradient-to-r from-purple-500 to-pink-500 font-bold text-3xl"
+                style={gradientTextStyle}
+              >
                 O
               </span>
             </Link>
@@ -76,11 +85,7 @@ const Navbar: React.FC = () => {
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
               {navItems.map((item) => (
-                <motion.div
-                  key={item}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
+                <motion.div key={item} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                   <Link
                     href={item === "Home" ? "/" : `/${item.toLowerCase()}`}
                     className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors duration-300"
@@ -109,12 +114,7 @@ const Navbar: React.FC = () => {
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6h16M4 12h16m-7 6h7"
-                  />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
                 </svg>
               ) : (
                 <svg
@@ -124,12 +124,7 @@ const Navbar: React.FC = () => {
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M6 18L18 6M6 6l12 12"
-                  />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
               )}
             </motion.button>
