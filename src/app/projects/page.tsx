@@ -85,7 +85,13 @@ export default function Projects(): JSX.Element {
       repo: "https://github.com/CyberTycoon/weatherApp.git",
       website: "https://weather-watch-seven.vercel.app/",
     },
-  
+    {
+      title: "K-Means Customer Segmentation",
+      description:
+        "Implemented K-Means clustering to segment customer data based on purchasing behavior, enabling targeted marketing strategies.",
+      image: "/k-means.png",
+      repo: "https://github.com/CyberTycoon/k-means",
+    },
     {
       title: "Swolenormous (Gym Site)",
       description:
@@ -93,6 +99,13 @@ export default function Projects(): JSX.Element {
       image: "/swolenormous.png",
       repo: "https://github.com/CyberTycoon/swolenormous",
       website: "https://swolenormous-eta.vercel.app/",
+    },
+    {
+      title: "GridSearch with XGBoost",
+      description:
+        "Implemented hyperparameter tuning using GridSearchCV to optimize XGBoost models for predictive accuracy.",
+      image: "/gridsearch-xgboost.png",
+      repo: "https://github.com/CyberTycoon/GridSearch-with-XGBoost",
     },
     {
       title: "FlowAI (AI Chat App)",
@@ -103,6 +116,20 @@ export default function Projects(): JSX.Element {
       website: "https://flow-3dfi9fn3u-silas-okanlawon-s-projects.vercel.app/",
     },
     {
+      title: "Flood Prediction in India",
+      description:
+        "Built a machine learning model that leverages historical rainfall and climate data to predict potential flood risks across regions in India.",
+      image: "/flood-prediction.jpg",
+      repo: "https://github.com/CyberTycoon/Flood_In_India",
+    },
+    {
+      title: "Paris House Price Prediction",
+      description:
+        "Developed a predictive model using linear regression and gradient descent to estimate house prices in Paris based on historical data.",
+      image: "/house-price.jpg",
+      repo: "https://github.com/CyberTycoon/House-price-prediction",
+    },
+    {
       title: "Automated Stock Price Notifier",
       description:
         "Built a Python script that retrieves stock prices periodically and updates a Google Sheet in real-time with notification services.",
@@ -110,11 +137,25 @@ export default function Projects(): JSX.Element {
       repo: "https://github.com/CyberTycoon/StockPriceNotifier.git",
     },
     {
-      title: "Web Automation for Padel Club",
+      title: "Knowledge Puzzle AI",
       description:
-        "Developed a Selenium-based Python script for automating court reservation checks, utilizing Google Sheets for data recording.",
-      image: "/webAutomation.jpg",
-      repo: "https://github.com/CyberTycoon/Web-Automation.git",
+        "Designed an AI-driven learning system that uses search algorithms to teach and test knowledge across various domains.",
+      image: "/knowledge-puzzle.jpg",
+      repo: "https://github.com/CyberTycoon/knowledge--puzzle",
+    },
+    {
+      title: "Sales Analysis Dashboard",
+      description:
+        "Created an analytical tool for sales trend analysis, revenue forecasting, and business insights using data visualization techniques.",
+      image: "/sales-analysis.jpg",
+      repo: "https://github.com/CyberTycoon/sales-analysis",
+    },
+    {
+      title: "Customer Churn Prediction with Random Forest",
+      description:
+        "Built a predictive model using Random Forest to analyze customer churn patterns and improve retention strategies.",
+      image: "/customer-churn.jpg",
+      repo: "https://github.com/CyberTycoon/customer-churn-random-forests",
     },
     {
       title: "Image and Video Processing Suite",
@@ -124,21 +165,28 @@ export default function Projects(): JSX.Element {
       repo: "https://github.com/CyberTycoon/image-video-processing.git",
     },
     {
-      title: "English Dictionary Desktop App",
-      description:
-        "Developed a desktop GUI app with Python for offline dictionary access, featuring user-friendly interfaces and responsive design.",
-      image: "/dictionary.png",
-      repo: "https://github.com/CyberTycoon/Python-Dictionary-GUI.git",
-    },
-
-    {
       title: "Data Visualization Dashboard",
       description:
         "Constructed an interactive data visualization dashboard with charts, tables, and summaries for real-time business insights and analytics.",
       image: "/data.jpg",
       repo: "https://github.com/CyberTycoon/My-Dashboard.git",
     },
+    {
+      title: "English Dictionary Desktop App",
+      description:
+        "Developed a desktop GUI app with Python for offline dictionary access, featuring user-friendly interfaces and responsive design.",
+      image: "/dictionary.png",
+      repo: "https://github.com/CyberTycoon/Python-Dictionary-GUI.git",
+    },
+    {
+      title: "Web Automation for Padel Club",
+      description:
+        "Developed a Selenium-based Python script for automating court reservation checks, utilizing Google Sheets for data recording.",
+      image: "/webAutomation.jpg",
+      repo: "https://github.com/CyberTycoon/Web-Automation.git",
+    },
   ];
+
 
   return (
     <section className="bg-gray-900 text-white py-20 min-h-screen">

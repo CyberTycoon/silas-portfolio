@@ -55,7 +55,7 @@ export default function About() {
               className="text-2xl px-4 font-semibold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-500 to-red-500"
               style={gradientTextStyle}
             >
-              SOFTWARE ENGINEER
+              SOFTWARE & ML ENGINEER 
             </h3>
             <p className="text-lg px-4 text-gray-300">
               I am Silas Okanlawon, a versatile software developer with expertise in web development, data science, and
